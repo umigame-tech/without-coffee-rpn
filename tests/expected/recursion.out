@@ -1,0 +1,12 @@
+10! = 3628800
+30! = 265252859812191058636308480000000
+fib(20) = 6765
+fib-memo(90) = 2880067194370816120
+ack(2, 3) = 9
+move disk 1 from A to C
+move disk 2 from A to B
+move disk 1 from C to B
+move disk 3 from A to C
+move disk 1 from B to A
+move disk 2 from B to C
+move disk 1 from A to C

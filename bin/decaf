@@ -1,0 +1,5 @@
+#!/bin/sh
+# Run the Decaf CLI straight from a source checkout.
+SELF=$(readlink -f "$0")
+ROOT=$(cd "$(dirname "$SELF")/.." && pwd)
+PYTHONPATH="$ROOT${PYTHONPATH:+:$PYTHONPATH}" exec python3 -m decaf "$@"

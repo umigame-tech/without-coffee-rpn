@@ -1,0 +1,11 @@
+--- read-file ---
+line 1: no coffee
+line 2: just tea
+line 3: water is fine
+--- read-lines ---
+1: LINE 1: NO COFFEE
+2: LINE 2: JUST TEA
+3: LINE 3: WATER IS FINE
+exists before delete: true
+exists after delete:  false
+caught: 'read-file': No such file or directory (no-such-file.txt)

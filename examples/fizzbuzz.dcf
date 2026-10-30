@@ -1,0 +1,12 @@
+# FizzBuzz: 条件分岐 (cond) とループ (for)
+
+: fizzbuzz ( n -- str )
+  | n |
+  {
+    [ n 15 mod 0 = ] [ "FizzBuzz" ]
+    [ n 3 mod 0 = ]  [ "Fizz" ]
+    [ n 5 mod 0 = ]  [ "Buzz" ]
+    [ true ]         [ n str ]
+  } cond ;
+
+1 31 [ fizzbuzz println ] for

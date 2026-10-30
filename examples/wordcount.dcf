@@ -1,0 +1,34 @@
+# 単語の出現回数を数え、結果をファイルに書き出す
+#   decaf examples/wordcount.dcf <入力ファイル> [出力ファイル]
+
+args len 1 < [
+  "usage: decaf wordcount.dcf <input> [output]" eprintln
+  2 exit
+] when
+
+args 0 get -> input
+args len 2 >= [ args 1 get ] [ "wordcount.txt" ] if -> output
+
+# 英字以外を空白にしてから小文字の単語に分割する
+: normalize ( str -- str )
+  [ | c | c upper c lower != [ c ] [ " " ] if ] map ;
+
+dict -> counts
+input read-file normalize lower words [
+  | w |
+  counts w  counts w get 0 or 1 +  put drop
+] each
+
+# 回数の多い順 (同数なら単語順) に並べる
+counts items [ | pair | pair 1 get neg ] sort-by -> ranked
+
+"" -> report
+ranked [
+  | pair |
+  report  "{} {}\n" { pair 1 get 4 " " pad-left  pair 0 get } fmt  +  -> report
+] each
+
+report output write-file
+"{} distinct words, written to {}" { ranked len output } fmt println
+"top 5:" println
+ranked 0 5 slice [ | pair | "  {} x{}" { pair 0 get pair 1 get } fmt println ] each

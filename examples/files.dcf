@@ -1,0 +1,24 @@
+# ファイルの読み書き
+
+"decaf-demo.txt" -> path
+
+# 書き込み (上書き) と追記
+"line 1: no coffee\n" path write-file
+"line 2: just tea\n" path append-file
+"line 3: water is fine\n" path append-file
+
+# 丸ごと読む
+"--- read-file ---" println
+path read-file print
+
+# 行ごとに読んで加工する
+"--- read-lines ---" println
+path read-lines [ | line i | "{}: {}" { i 1 + line upper } fmt println ] each-index
+
+# 存在確認と削除
+path file-exists? "exists before delete: " swap str + println
+path delete-file
+path file-exists? "exists after delete:  " swap str + println
+
+# 存在しないファイルを読むとエラーになるが、try で捕まえられる
+[ "no-such-file.txt" read-file ] [ "caught: " swap + println ] try

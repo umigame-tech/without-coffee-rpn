@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "decaf-lang"
+version = "0.1.0"
+description = "Decaf: a general-purpose, stack-based programming language in Reverse Polish Notation"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+[project.scripts]
+decaf = "decaf.cli:main"
+
+[tool.setuptools]
+packages = ["decaf"]

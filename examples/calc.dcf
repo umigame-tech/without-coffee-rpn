@@ -1,0 +1,39 @@
+# Decaf で書いた「逆ポーランド記法電卓」
+# 標準入力から 1 行ずつ式を読み、自前のスタック (リスト) で評価する。
+#   echo "3 4 + 2 *" | decaf examples/calc.dcf
+#   decaf examples/calc.dcf          (対話モード: 空行か EOF で終了)
+
+# 演算子 -> ( a b -- result ) のクォーテーション
+dict
+  "+" [ + ] put
+  "-" [ - ] put
+  "*" [ * ] put
+  "/" [ dup 0 = [ "division by zero" throw ] when / ] put
+  "^" [ ** ] put
+  "max" [ max ] put
+=> ops
+
+: apply-op ( stack op -- stack )
+  | st op |
+  ops op has? not [ "unknown token '" op + "'" + throw ] when
+  st len 2 < [ "not enough operands for '" op + "'" + throw ] when
+  st pop -> b  pop -> a  drop
+  st  a b ops op get call  push ;
+
+: eval-line ( str -- result )
+  { } -> st
+  words [
+    | tok |
+    tok num -> n
+    n nil? [ st tok apply-op ] [ st n push ] if  -> st
+  ] each
+  st len 1 != [ "malformed expression, stack: " st str + throw ] when
+  st first ;
+
+[
+  read-line -> line
+  line nil? [ break ] when
+  line trim empty? [ break ] when
+  [ line eval-line "= " swap str + println ]
+  [ "error: " swap + println ] try
+] loop
