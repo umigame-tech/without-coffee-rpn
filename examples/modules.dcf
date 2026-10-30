@@ -1,0 +1,10 @@
+# 別ファイルの関数を import して使う (パスはこのファイルからの相対)
+"lib/mathlib.dcf" import
+
+7 square println
+3 cube println
+84 36 gcd println
+4 6 lcm println
+
+# 関数参照 (&name) を高階関数に渡す
+{ 1 2 3 4 } &square map println

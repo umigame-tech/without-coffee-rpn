@@ -1,0 +1,19 @@
+# 例外処理: throw と try
+
+: safe-div ( a b -- a/b )
+  | a b |
+  b 0 = [ "division by zero is not allowed" throw ] when
+  a b / ;
+
+[ 10 2 safe-div println ] [ "error: " swap + println ] try
+[ 10 0 safe-div println ] [ "error: " swap + println ] try
+
+# throw には任意の値を渡せる
+[ dict "code" 404 put throw ] [ "code" get "status = {}" swap 1 collect fmt println ] try
+
+# 組み込みワードのエラーも捕捉できる
+[ "abc" 1 + ] [ "caught: " swap + println ] try
+
+# 数値への変換に失敗すると nil が返る
+"12.5" num println
+"oops" num nil? println

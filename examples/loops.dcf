@@ -1,0 +1,32 @@
+# ループいろいろ
+
+# times: n 回繰り返す
+3 [ "coffee? no thanks." println ] times
+
+# for: start <= i < end
+"squares:" print
+1 6 [ dup * " " swap str + print ] for
+nl
+
+# while: [条件] [本体]
+1 -> n
+[ n 100 < ] [ n 2 * -> n ] while
+"first power of two >= 100: " n str + println
+
+# each と break / continue
+{ 1 2 3 4 5 6 7 8 9 10 } [
+  | x |
+  x 2 mod 0 = [ continue ] when    # 偶数は飛ばす
+  x 7 > [ break ] when             # 7 を超えたら終了
+  x println
+] each
+
+# dict の each はキーと値を積む
+dict "apple" 3 put "banana" 5 put -> stock
+stock [ | k v | "{}: {}" { k v } fmt println ] each
+
+# map / filter / reduce
+1 11 range -> nums
+nums [ dup * ] map println
+nums [ 3 mod 0 = ] filter println
+nums 0 [ + ] reduce println

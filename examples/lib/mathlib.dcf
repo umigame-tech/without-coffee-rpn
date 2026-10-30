@@ -1,0 +1,7 @@
+# import で読み込まれるライブラリ
+: square ( x -- x*x ) dup * ;
+: cube ( x -- x^3 ) dup dup * * ;
+: gcd ( a b -- gcd )
+  | a b |
+  b 0 = [ a ] [ b a b mod gcd ] if ;
+: lcm ( a b -- lcm ) 2dup * abs -rot gcd div ;

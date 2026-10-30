@@ -1,0 +1,15 @@
+7 distinct words, written to report.txt
+top 5:
+  the x3
+  fox x2
+  quick x1
+  brown x1
+  lazy x1
+--- report.txt ---
+   3 the
+   2 fox
+   1 quick
+   1 brown
+   1 lazy
+   1 dog
+   1 end

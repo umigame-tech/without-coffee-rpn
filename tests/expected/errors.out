@@ -1,0 +1,6 @@
+5
+error: division by zero is not allowed
+status = 404
+caught: '+': cannot add string and int (use 'str' to convert to a string first)
+12.5
+true

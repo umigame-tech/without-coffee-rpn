@@ -1,0 +1,42 @@
+# 再帰の例: 階乗・フィボナッチ・ハノイの塔・アッカーマン関数
+
+: fact ( n -- n! )
+  | n |
+  n 1 <= [ 1 ] [ n 1 - fact n * ] if ;
+
+: fib ( n -- fib(n) )
+  | n |
+  n 2 < [ n ] [ n 1 - fib n 2 - fib + ] if ;
+
+# メモ化版フィボナッチ: グローバルな dict にキャッシュする
+dict => memo
+: fib-memo ( n -- fib(n) )
+  | n |
+  n 2 < [ n return ] when
+  memo n has? [ memo n get return ] when
+  n 1 - fib-memo n 2 - fib-memo +  -> r
+  memo n r put drop
+  r ;
+
+: hanoi ( n from to via -- )
+  | n from to via |
+  n 0 > [
+    n 1 - from via to hanoi
+    "move disk {} from {} to {}" { n from to } fmt println
+    n 1 - via to from hanoi
+  ] when ;
+
+: ack ( m n -- A(m,n) )
+  | m n |
+  {
+    [ m 0 = ] [ n 1 + ]
+    [ n 0 = ] [ m 1 - 1 ack ]
+    [ true ]  [ m 1 - m n 1 - ack ack ]
+  } cond ;
+
+"10! = {}" { 10 fact } fmt println
+"30! = {}" { 30 fact } fmt println
+"fib(20) = {}" { 20 fib } fmt println
+"fib-memo(90) = {}" { 90 fib-memo } fmt println
+"ack(2, 3) = {}" { 2 3 ack } fmt println
+3 "A" "C" "B" hanoi

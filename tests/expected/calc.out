@@ -1,0 +1,6 @@
+= 14
+error: malformed expression, stack: { 1 2 3 }
+error: division by zero
+= 1021
+error: unknown token 'x'
+= 7

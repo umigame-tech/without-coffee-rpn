@@ -1,0 +1,10 @@
+#!/usr/bin/env decaf
+# Hello, World! と基本的な計算
+"Hello, World!" println
+
+# 逆ポーランド記法: (3 + 4) * 5
+3 4 + 5 * println          # => 35
+
+# 変数: 値を -> で名前に束縛する
+"Decaf" -> name
+"Hello, {}!" { name } fmt println

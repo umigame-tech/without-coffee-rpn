@@ -1,0 +1,20 @@
+# クイックソート (再帰 + 高階関数 filter)
+
+: quicksort ( list -- sorted )
+  | xs |
+  xs len 1 <= [ xs return ] when
+  xs first -> pivot
+  xs rest -> others
+  others [ pivot < ] filter quicksort
+  { pivot } +
+  others [ pivot >= ] filter quicksort + ;
+
+{ 33 10 55 71 29 3 18 42 10 } -> data
+"before: " print data println
+"after:  " print data quicksort println
+
+# 文字列のリストも並べ替えられる
+{ "pear" "apple" "fig" "banana" } quicksort println
+
+# 組み込みの sort-by: 文字列の長さ順
+{ "pear" "apple" "fig" "banana" } [ len ] sort-by println

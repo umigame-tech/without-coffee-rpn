@@ -1,0 +1,4 @@
+before: { 33 10 55 71 29 3 18 42 10 }
+after:  { 3 10 10 18 29 33 42 55 71 }
+{ "apple" "banana" "fig" "pear" }
+{ "fig" "pear" "apple" "banana" }

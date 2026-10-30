@@ -1,0 +1,21 @@
+# エラトステネスのふるい: コマンドライン引数で上限を指定できる
+#   decaf examples/primes.dcf 100
+
+args empty? [ 50 ] [ args first int ] if -> limit
+
+{ } -> sieve
+limit 1 + [ sieve true push drop ] times
+sieve 0 false put 1 false put drop
+
+2 -> i
+[ i i * limit <= ] [
+  sieve i get [
+    i i * limit 1 + i [ | j | sieve j false put drop ] for-step
+  ] when
+  i 1 + -> i
+] while
+
+{ } -> primes
+sieve [ | p i | p [ primes i push drop ] when ] each-index
+"primes <= {}: {}" { limit primes len } fmt println
+primes " " join println
